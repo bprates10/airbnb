@@ -8,11 +8,16 @@ const Property = use("App/Models/Property");
 
 class PropertyController {
   /**
-   * Retorna todos os imóveis
+   * Recebe a latitude e longitude do front-end para executar a busca
+   * Retorna apenas os imóveis em acordo com a scope query (geolocalização)
    * GET properties
    */
-  async index() {
-    const properties = Property.all();
+  async index({ request }) {
+    const { latitude, longitude } = request.all();
+
+    const properties = Property.query()
+      .nearBy(latitude, longitude, 10)
+      .fetch();
     return properties;
   }
 
