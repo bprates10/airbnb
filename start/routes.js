@@ -21,6 +21,8 @@ Route.get("/", () => {
 });
 
 Route.post("/users", "UserController.create");
+Route.get("/users/:id", "UserController.index");
+Route.get("/find", "UserController.show");
 Route.post("/sessions", "SessionController.create");
 // Cria todas as rotas de properties
 Route.resource("properties", "PropertyController")
@@ -28,3 +30,5 @@ Route.resource("properties", "PropertyController")
   .apiOnly()
   // Garante que apenas usuários autenticados acessarão a rota
   .middleware("auth");
+Route.post("properties/:id/images", "ImageController.store").middleware("auth");
+Route.get("images/:path", "ImageController.show");
