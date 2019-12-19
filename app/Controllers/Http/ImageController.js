@@ -36,7 +36,7 @@ class ImageController {
   }
 
   async show({ params, response }) {
-    return response.download(Helpers.tmpPath(`uploads/${params.path}`));
+    return response.download(Helpers.tmpPath(`upload/${params.path}`));
   }
 }
 
